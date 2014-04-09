@@ -26,7 +26,13 @@ exit;
 			if [ $? != 0 ]; then 
 				$SYN_MONITOR errorAssignment $UUID "gtdownload error"
 			else
-				$SYN_MONITOR returnAssignment $UUID		
+				if [ $(ls $OUTPUTDIR/$UUID/*.bam | wc -l) = 1 ]; then
+					BAM_FILE=`ls $OUTPUTDIR/$UUID/*.bam`
+					$SYN_MONITOR addBamGroups $UUID $BAM_FILE
+					$SYN_MONITOR returnAssignment $UUID
+				else
+					 $SYN_MONITOR errorAssignment $UUID "File not found"
+				fi		
 			fi
 		fi
 	fi
