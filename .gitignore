@@ -2,5 +2,6 @@
 debs
 icgc
 icgc-aligner.tar
+bamsplit_*
 
 # INCLUDE THE FOLLOWING

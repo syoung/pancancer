@@ -8,6 +8,8 @@ import subprocess
 from multiprocessing import Pool
 
 def run_fastqtobam(args):
+	print "Doing run_fastqtobam"
+
 	cmd = [
 		"fastqtobam",
 		"I=%s" % (args['fq1']),
@@ -37,7 +39,9 @@ if __name__ == '__main__':
 		args.workdir = args.splitdir
 	
 	id_map = {}
-	a = subprocess.Popen("samtools view -H %s | grep '^@RG'" % (args.bamfile), stdout=subprocess.PIPE, shell=True)
+	a = subprocess.Popen("/agua/apps/samtools/0.1.19/samtools view -H %s | grep '^@RG'" % (args.bamfile), stdout=subprocess.PIPE, shell=True)
+
+#	a = subprocess.Popen("samtools view -H %s | grep '^@RG'" % (args.bamfile), stdout=subprocess.PIPE, shell=True)
 	stdout, stderr = a.communicate()
 
 	for line in stdout.split("\n"):
@@ -67,7 +71,8 @@ if __name__ == '__main__':
 	
 	if not args.resume or missing:
 		cmd = [
-			"bamtofastq", 
+#			"bamtofastq", 
+			"/agua/apps/biobambam/0.0.129/src/bamtofastq", 
 			"filename=%s" % (args.bamfile),
 			"outputperreadgroup=1",
 			"gz=1",
@@ -77,6 +82,7 @@ if __name__ == '__main__':
 		]
 		print "Doing split"
 		a = subprocess.call(cmd)
+
 	
 	proc_list = []
 	for gr in id_map:
