@@ -3,7 +3,7 @@
 SYN_MONITOR="/pancanfs/software/synapseICGCMonitor"
 DOWNLOAD_SCRIPT="/agua/apps/bioapps/bin/gt/download.pl"
 OUTPUTDIR="/pancanfs/input"
-KEYFILE="/home/centos/annai-cghub.key"
+KEYFILE="/home/ubuntu/annai-cghub.key"
 
 while :
 do
@@ -19,8 +19,6 @@ do
 #			gtdownload -c ~/haussl_cghub.key -v -p /pancanfs/input/ -d $UUID
 
 	    echo "$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE"
-	    
-exit;
 	    $DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE
 
 			if [ $? != 0 ]; then 
