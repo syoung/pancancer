@@ -3,5 +3,6 @@ debs
 icgc
 icgc-aligner.tar
 bamsplit_*
+*.pyc
 
 # INCLUDE THE FOLLOWING
