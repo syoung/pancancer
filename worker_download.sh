@@ -15,13 +15,8 @@ do
 	else
 		echo Downloading $UUID
     	if [ ! -e /pancanfs/input/$UUID ]; then
-
-#			gtdownload -c ~/haussl_cghub.key -v -p /pancanfs/input/ -d $UUID
-
-	    echo "$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE"
-	    
-exit;
-	    $DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE
+		    echo "$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE"
+	    	$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE
 
 			if [ $? != 0 ]; then 
 				$SYN_MONITOR errorAssignment $UUID "gtdownload error"
