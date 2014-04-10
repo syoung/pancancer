@@ -10,8 +10,9 @@ do
 	echo "Scanning"
 	UUID=`$SYN_MONITOR getAssignmentForWork ucsc_biofarm todownload`
 	if [ $? != 0 ]; then 
-		echo "Done, exiting"
-		exit 0
+		echo "Done, sleeping"
+		#exit 0
+		sleep 60
 	else
 		echo Downloading $UUID
     	if [ ! -e /pancanfs/input/$UUID ]; then

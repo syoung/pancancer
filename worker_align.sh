@@ -8,8 +8,9 @@ do
 	echo "Scanning"
 	UUID=`$SYN_MONITOR getAssignmentForWork ucsc_biofarm split`
 	if [ $? != 0 ]; then 
-		echo "Done, exiting"
-		exit 0
+		echo "Done, sleeping"
+		#exit 0
+		sleep 60
 	else
 		echo Aligning $UUID
     	if [ ! -e /pancanfs/splits/$UUID ]; then
