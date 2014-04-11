@@ -13,7 +13,11 @@ do
 	else
 		echo Aligning $UUID
     	if [ ! -e /pancanfs/splits/$UUID ]; then
+			
+			echo "$ALIGN_SCRIPT $UUID"
+
 			$ALIGN_SCRIPT $UUID
+
 			if [ $? != 0 ]; then 
 				$SYN_MONITOR errorAssignment $UUID "aligning error"
 			else
