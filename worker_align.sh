@@ -1,7 +1,8 @@
 #!/bin/bash
 
-SYN_MONITOR="/pancanfs/software/synapseICGCMonitor"
-ALIGN_SCRIPT="/pancanfs/software/pcap_align.sh"
+BASEDIR="$(cd `dirname $0`; pwd)"
+SYN_MONITOR="$BASEDIR/synapseICGCMonitor"
+ALIGN_SCRIPT="$BASEDIR/job_align.sh"
 
 while :
 do
@@ -13,7 +14,7 @@ do
 		sleep 60
 	else
 		echo Aligning $UUID
-    	if [ ! -e /pancanfs/splits/$UUID ]; then
+    	if [ ! -e /pancanfs*/splits/$UUID ]; then
 			$ALIGN_SCRIPT $UUID
 			if [ $? != 0 ]; then 
 				$SYN_MONITOR errorAssignment $UUID "aligning error"
