@@ -7,7 +7,8 @@ UUID=$1
 INPUT_BASE=/pancanfs/splits
 OUTPUT_BASE=/pancanfs/output
 REF_SEQ=/pancanfs/reference/genome.fa.gz
-THREADS=16
+THREADS=$(cat /proc/cpuinfo | grep processor | wc -l)
+echo "THREADS: $THREADS"
 
 for BAM in $INPUT_BASE/$UUID/*.bam; do
 	CMD_PREFIX=""

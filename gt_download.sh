@@ -1,6 +1,9 @@
 #!/bin/bash
 
 SYN_MONITOR="/pancanfs/software/synapseICGCMonitor"
+DOWNLOAD_SCRIPT="/agua/apps/bioapps/bin/gt/download.pl"
+OUTPUTDIR="/pancanfs/input"
+KEYFILE="/home/ubuntu/annai-cghub.key"
 
 while :
 do
@@ -12,7 +15,12 @@ do
 	else
 		echo Downloading $UUID
     	if [ ! -e /pancanfs/input/$UUID ]; then
-			gtdownload -c ~/haussl_cghub.key -v -p /pancanfs/input/ -d $UUID
+
+#			gtdownload -c ~/haussl_cghub.key -v -p /pancanfs/input/ -d $UUID
+
+	    echo "$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE"
+	    $DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTPUTDIR --keyfile $KEYFILE
+
 			if [ $? != 0 ]; then 
 				$SYN_MONITOR errorAssignment $UUID "gtdownload error"
 			else
