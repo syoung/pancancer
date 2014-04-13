@@ -31,7 +31,7 @@ def lane_level_bam_from_fastq(RG, workdir):
         return False, bam_filename
 
     #don't md5sum at this point because we go ahead and reheader 
-    exit_code = os.system("fastqtobam I=%s I=%s gz=1 level=1 RGID=%s:%s RGCN=%s RGPL=%s RGLB=%s RGPI=%s RGSM=%s RGPU=%s RGDT=%s > %s" %
+    exit_code = os.system("fastqtobam I=%s I=%s gz=1 level=1 threads=3 RGID=%s:%s RGCN=%s RGPL=%s RGLB=%s RGPI=%s RGSM=%s RGPU=%s RGDT=%s > %s" %
                           (first_reads, second_reads, 
                            RG["CN"], RG["ID"], RG["CN"], RG["PL"], RG["LB"], RG["PI"], RG["SM"], RG["PU"], RG["DT"], 
                            bam_filename))
@@ -58,7 +58,7 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
     rg_file = open(read_group_sam, "r")
 
     #create the read group fastqs
-    os.system("bamtofastq outputperreadgroup=1 gz=1 level=1 outputdir=%s < %s" %(work_dir, bam_filename))
+    os.system("bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s < %s" %(work_dir, bam_filename))
         
     log_file_path = (os.path.join(output_dir, "log.txt"))
     log_file = open(log_file_path, "a")
