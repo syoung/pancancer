@@ -1,4 +1,5 @@
 # IGNORE THE FOLLOWING
+stop_*.flag
 debs
 icgc
 icgc-aligner.tar
