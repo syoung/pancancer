@@ -2,9 +2,15 @@
 
 BASEDIR="$(cd `dirname $0`; pwd)"
 SYN_MONITOR="$BASEDIR/synapseICGCMonitor"
+STOP_FLAGFILE="$BASEDIR/stop_download.flag"
 
 while :
 do
+	if [ -e $STOP_FLAGFILE ]; then
+	    echo "Flagfile found. Exiting"
+	    exit 0
+	fi
+
 	echo "Scanning"
 	UUID=`$SYN_MONITOR getAssignmentForWork ucsc_biofarm todownload`
 	if [ $? != 0 ]; then 

@@ -2,8 +2,8 @@
 
 ALIGN=bwa_mem.pl
 
-VOLUME=$1
-UUID=$2
+VOLUME=/pancanfs
+UUID=$1
 
 INPUT_BASE=$VOLUME/splits
 OUTPUT_BASE=$VOLUME/output
@@ -20,4 +20,7 @@ else
 	CMD_PREFIX="sudo docker run -v /pancanfs:/pancanfs -v $VOLUME:$VOLUME icgc-aligner"
 fi
 
-$CMD_PREFIX $ALIGN -r $REF_SEQ -t $THREADS -o $OUTPUT_BASE/$UUID -s $UUID $BAM_DIR/*.bam
+for BAM in $BAM_DIR/*.bam; do
+	echo $CMD_PREFIX $ALIGN -r $REF_SEQ -t $THREADS -o $OUTPUT_BASE/$UUID -s `basename $BAM .cleaned.bam` $BAM -workdir /mnt
+	$CMD_PREFIX $ALIGN -r $REF_SEQ -t $THREADS -o $OUTPUT_BASE/$UUID -s `basename $BAM .cleaned.bam` $BAM -workdir /mnt
+done

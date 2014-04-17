@@ -1,6 +1,7 @@
 import os
 import header_utils
 import utils
+import subprocess
 
 def get_bam_file(dirpath):
     """Get the BAM file in the directory - assumes one BAM file"""
@@ -11,7 +12,7 @@ def get_bam_file(dirpath):
             return os.path.join(dirpath, filename)
 
 
-def lane_level_bam_from_fastq(RG, workdir, outdir):
+def lane_level_bam_from_fastq(RG, workdir):
     """Create lane level bam, assuming bamtofastq has already been run"""
 
     first_reads = os.path.join(workdir, "%s_1.fq" % RG["ID"])
@@ -20,7 +21,7 @@ def lane_level_bam_from_fastq(RG, workdir, outdir):
     unmatched_second_reads = os.path.join(workdir, "%s_o2.fq" % RG["ID"])
     single_reads = os.path.join(workdir, "%s_s.fq" % RG["ID"])
 
-    bam_filename = "%s/%s.paired.bam" % (outdir, RG["ID"])
+    bam_filename = "%s/%s.paired.bam" % (workdir, RG["ID"])
 
     if not os.path.exists(first_reads):
         print("WARNING: no paired reads for RG %s skipping" % first_reads)
@@ -31,7 +32,7 @@ def lane_level_bam_from_fastq(RG, workdir, outdir):
         return False, bam_filename
 
     #don't md5sum at this point because we go ahead and reheader 
-    exit_code = os.system("fastqtobam I=%s I=%s gz=1 level=1 RGID=%s:%s RGCN=%s RGPL=%s RGLB=%s RGPI=%s RGSM=%s RGPU=%s RGDT=%s > %s" %
+    exit_code = os.system("fastqtobam I=%s I=%s gz=1 level=1 threads=3 RGID=%s:%s RGCN=%s RGPL=%s RGLB=%s RGPI=%s RGSM=%s RGPU=%s RGDT=%s > %s" %
                           (first_reads, second_reads, 
                            RG["CN"], RG["ID"], RG["CN"], RG["PL"], RG["LB"], RG["PI"], RG["SM"], RG["PU"], RG["DT"], 
                            bam_filename))
@@ -58,7 +59,7 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
     rg_file = open(read_group_sam, "r")
 
     #create the read group fastqs
-    os.system("bamtofastq outputperreadgroup=1 gz=1 level=1 outputdir=%s < %s" %(work_dir, bam_filename))
+    subprocess.check_call("bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s < %s" %(work_dir, bam_filename), shell=True)
         
     log_file_path = (os.path.join(output_dir, "log.txt"))
     log_file = open(log_file_path, "a")

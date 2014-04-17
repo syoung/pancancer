@@ -229,7 +229,7 @@ def getInfo(args, syn):
             donor_identifier = result['file.donor_identifier'][0]
             res2 = syn.chunkedQuery("select * from file where parentId=='%s' and donor_identifier=='%s'" %(TRACKER_ID, donor_identifier))
             for a in res2:
-                if a['file.sample_type_name'][0] == "Blood Derived Normal":
+                if a['file.sample_type_name'][0] in ["Blood Derived Normal", "Solid Tissue Normal"]:
                     print a['file.accession_identifier'][0]
         else:
             print result['file.status'][0]
