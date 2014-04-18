@@ -14,7 +14,17 @@ HISTORY
 
 USAGE
 
-$0 <--key (attach|detach)> <--value Int> <--type (SSD|HD)>
+$0 <--mode String> <--section String> <--key String> [--value String]
+
+
+mode    : setKey or getKey
+section : Section (1st level key) of config file
+key     : Key (2nd level) name (e.g., tenantid)
+value   : (Optional) Value to be set in key-value pair
+
+EXAMPLE
+
+./config.pl --mode setKey --section openstack --key tenantname --value ACCOUNTNAME
 
 =cut
 

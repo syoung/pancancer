@@ -34,8 +34,7 @@ use lib "/agua/lib";
 
 #### INTERNAL MODULES
 use Conf::Yaml;
-#use Openstack::Nova;
-use Queue::Manager;
+use Openstack::Nova;
 
 my $installdir = $ENV{'installdir'} || "/agua";
 my $configfile	=	"$installdir/conf/config.yaml";

@@ -2,29 +2,23 @@
 
 =head2
 
-APPLICATION 	restart
+APPLICATION 	cluster
 
 PURPOSE
 
-	1. Detect nodes running old version of software
-	
-	2. Run 'max' number of commands concurrently
-	
-	3. Poll running completed to determine which have complete
-	
-	4. Execute remaining commands up to 'max' number
-	
-	5. Repeat 2-4 until all commands are run
+	1. Send SSH commands to VMs (filtered by name or pattern)
 
+	2. List VMs (filtered by name or pattern)
+	
 HISTORY
 
-	v0.01	Basic loop with threads
+	v0.01	Basic wrappers around nova and cinder API clients
 
 USAGE
 
-$0 [--max Int] [--sleep Int] <--commands|--nodename String>
+$0 <--mode (command|list)> [--regex String] [--name String] [--command String]
 
-nodename 	:    Name of node (or first part of name)
+NB: --regex option takes precedence over --name option
 
 =cut
 
@@ -44,26 +38,35 @@ use lib "/agua/lib";
 
 #### INTERNAL MODULES
 use Conf::Yaml;
-use Queue::Manager;
+use Openstack::Nova;
 
 my $installdir = $ENV{'installdir'} || "/agua";
 my $configfile	=	"$installdir/conf/config.yaml";
 
-my $nodename;
-my $mode;
+my $mode		=	"command";
+my $username	=	"ubuntu";
+my $name;
+my $regex;
+my $command;
 my $SHOWLOG		=	2;
 my $PRINTLOG	=	2;
-my $logfile		=	"/tmp/pancancer-restart.$$.log";
+my $logfile		=	"/tmp/pancancer-volume.$$.log";
 my $help;
 GetOptions (
-    'nodename=s'	=> \$nodename,
-    'mode=s'	=> \$mode,
+    'mode=s'		=> \$mode,
+    'username=s'	=> \$username,
+    'name=s'		=> \$name,
+    'regex=s'		=> \$regex,
+    'command=s'		=> \$command,
     'SHOWLOG=i'     => \$SHOWLOG,
     'PRINTLOG=i'    => \$PRINTLOG,
     'help'          => \$help
 ) or die "No options specified. Try '--help'\n";
 usage() if defined $help;
 
+#### SUPPORTED MODES
+print "Mode not defined\n" and usage() if not defined $mode;
+print "Mode not supported: $mode\n" and exit if $mode !~ /(command|list)/;
 
 my $conf = Conf::Yaml->new(
     memory      =>  0,
@@ -75,14 +78,19 @@ my $conf = Conf::Yaml->new(
     logfile     =>  $logfile
 );
 
-
-my $object = Queue::Manager->new({
+my $object = Openstack::Nova->new({
 	conf		=>	$conf,
     SHOWLOG     =>  $SHOWLOG,
     PRINTLOG    =>  $PRINTLOG,
     logfile     =>  $logfile
 });
-$object->$mode($nodename);
+
+$object->$mode({
+	name		=>	$name,
+	username	=>	$username,
+	command		=>	$command,
+	regex		=>	$regex
+});
 
 exit 0;
 
