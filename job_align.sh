@@ -1,13 +1,17 @@
 #!/bin/bash
 
+BASEDIR="$(cd `dirname $0`; pwd)"
+
 ALIGN=bwa_mem.pl
 
 VOLUME=$1
 UUID=$2
 
+. $BASEDIR/align.conf
+
 INPUT_BASE=$VOLUME/splits
 OUTPUT_BASE=$VOLUME/output
-REF_SEQ=/pancanfs/reference/genome.fa.gz
+
 THREADS=$(cat /proc/cpuinfo | grep processor | wc -l)
 echo "THREADS: $THREADS"
 

@@ -15,10 +15,10 @@ def get_bam_file(dirpath):
 def lane_level_bam_from_fastq(RG, workdir):
     """Create lane level bam, assuming bamtofastq has already been run"""
 
-    first_reads = os.path.join(workdir, "%s_1.fq" % RG["ID"])
-    second_reads = os.path.join(workdir, "%s_2.fq" % RG["ID"])
-    unmatched_first_reads = os.path.join(workdir, "%s_o1.fq" % RG["ID"])
-    unmatched_second_reads = os.path.join(workdir, "%s_o2.fq" % RG["ID"])
+    first_reads = os.path.join(workdir, "%s_1.fq.gz" % RG["ID"])
+    second_reads = os.path.join(workdir, "%s_2.fq.gz" % RG["ID"])
+    unmatched_first_reads = os.path.join(workdir, "%s_o1.fq.gz" % RG["ID"])
+    unmatched_second_reads = os.path.join(workdir, "%s_o2.fq.gz" % RG["ID"])
     single_reads = os.path.join(workdir, "%s_s.fq" % RG["ID"])
 
     bam_filename = "%s/%s.paired.bam" % (workdir, RG["ID"])
