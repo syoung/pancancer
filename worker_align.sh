@@ -21,7 +21,7 @@ do
 	    return
 	fi
 		echo Aligning $UUID
-    	if [ ! -e /pancanfs*/splits/$UUID ]; then
+    	if [ -e /pancanfs*/splits/$UUID ]; then
 			echo "$ALIGN_SCRIPT $UUID"
 			$ALIGN_SCRIPT $UUID
 
@@ -31,6 +31,8 @@ do
 			$SYN_MONITOR returnAssignment $UUID		
 		fi
 	else
+		echo $SYN_MONITOR errorAssignment $UUID "Split not found"
+
 		$SYN_MONITOR errorAssignment $UUID "Split not found"
 	fi
 

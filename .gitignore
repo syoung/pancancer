@@ -5,5 +5,6 @@ icgc
 icgc-aligner.tar
 bamsplit_*
 *.pyc
+annaiservices-openrc.sh
 
 # INCLUDE THE FOLLOWING
