@@ -7,7 +7,7 @@ BASEDIR="$(cd `dirname $0`; pwd)"
 VOLUME=$1
 UUID=$2
 
-
+echo DOWNLOADING $UUID into $VOLUME
 OUTDIR=$VOLUME/input
 
 ##echo "$DOWNLOAD_SCRIPT --uuid $UUID --outputdir $OUTDIR --keyfile $KEYFILE"

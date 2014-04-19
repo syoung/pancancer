@@ -1,8 +1,7 @@
 #!/bin/bash
 #$ -S /bin/bash
 #$ -cwd
-#$ -pe smp 32
-## Request 32 cpus to max out the node, and not end up with multiple gtdownload per machine
+#$ -pe smp 16
 
 #this script assumes that it will be qsub'ed in the pancancer working directory
 

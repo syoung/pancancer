@@ -16,7 +16,7 @@ OUTDIR=$VOLUME/splits
 if [ -z $USE_DOCKER ]; then 
 	CMD_PREFIX="" 
 else
-	CMD_PREFIX="sudo docker run -v /pancanfs:/pancanfs -v $VOLUME:$VOLUME -v /mnt:/mnt icgc-aligner"
+	CMD_PREFIX="sudo docker run -v $BASEDIR:$BASEDIR -v $VOLUME:$VOLUME -v /mnt:/mnt icgc-aligner"
 fi
 
 BAM_FILE=$(ls $INDIR/$UUID/*.bam)
@@ -29,7 +29,7 @@ if [[ "$SAMPLE_TYPE" == "Primary Solid Tumor" ]]; then
 	echo "Running $CMD"
 	$CMD
 elif [[ "$SAMPLE_TYPE" == "Blood Derived Normal" || "$SAMPLE_TYPE" == "Solid Tissue Normal" ]]; then
-	$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/splits/$UUID --work_dir$WORK_DIR/$UUID --normal_id $UUID
+	$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/splits/$UUID --work_dir $WORK_DIR/$UUID --normal_id $UUID
 else
 	exit 1
 fi
