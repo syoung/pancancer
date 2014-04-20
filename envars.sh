@@ -34,7 +34,7 @@ export LD_LIBRARY_PATH=/mnt/data/apps/libs/boost/1.39.0/libs:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/agua/apps/biobambam/libmaus-0.0.108-release-20140319092837/src/.libs:$LD_LIBRARY_PATH
 
 #### LD_PRELOAD
-export LD_PRELOAD=libc.so.6
+#export LD_PRELOAD=libc.so.6
 
 
 #/agua/apps/pcap/PCAP-core/lib
@@ -43,3 +43,5 @@ export LD_PRELOAD=libc.so.6
 #/agua/apps/perl/5.18.2/lib/5.18.2/lib/perl5/x86_64-linux-gnu-thread-multi
 #/agua/apps/perl/5.18.2/lib/5.18.2/lib/perl5
 
+export PATH=/agua/apps/pcap/PCAP-core/install_tmp/bwa:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
+export PATH=/agua/apps/pcap/PCAP-core/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin:/bin
