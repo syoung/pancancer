@@ -59,7 +59,11 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
     rg_file = open(read_group_sam, "r")
 
     #create the read group fastqs
-    subprocess.check_call("bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s < %s" %(work_dir, bam_filename), shell=True)
+    try:
+        subprocess.check_call("bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s < %s" %(work_dir, bam_filename), shell=True)
+    except:
+        print "Failure in bam splitting"
+        return 1
         
     log_file_path = (os.path.join(output_dir, "log.txt"))
     log_file = open(log_file_path, "a")
@@ -85,3 +89,5 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
         log_file.close()
     else:
         print "Invalid header/metadata for BAM" % bam_filename
+        return 1
+    return 0
