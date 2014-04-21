@@ -1,0 +1,19 @@
+#### IMPLEMENTED ONLY FOR STRICT SEMVERS FOR NOW
+#### LATER: ADD SUPPORT FOR OTHER VERSION TYPES
+#R	3.0.2-1
+#bamtools	v2.3.0
+bedtools	2.19.1
+bioapps		0.6.0
+biobambam	0.0.129
+#blat		35
+#circos	0.64
+#bwa		0.7.7
+#cmake	2.8.12.2
+cufflinks	2.1.1
+emboss	6.6.0
+fastqc	0.10.1
+#gatk	2.8-1
+#java	0.7.1_61
+#libmaus	libmaus_0_7_7
+rsem	1.2.11
+python	3.3.0

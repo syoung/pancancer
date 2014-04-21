@@ -1,0 +1,15 @@
+---
+pancancer:
+  locations:
+  - pancanfs
+  - pancanfs2
+  - pancanfs3
+packages:
+  synapse:
+    1.0.0:
+      INSTALLDIR:  /agua/apps/pancancer/synapseICGCMonitor
+  python:
+    2.7.3:
+      INSTALLDIR: /agua/apps/python/2.7.3
+    3.3.0:
+      INSTALLDIR: /agua/apps/python/3.3.0

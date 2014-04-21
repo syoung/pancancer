@@ -15,8 +15,9 @@ do
 	echo "Scanning"
 	UUID=`$SYN_MONITOR getAssignmentForWork ucsc_biofarm split`
 	if [ $? != 0 ]; then 
-		echo "Done, exiting"
-		exit 0
+		#echo "Done, exiting"
+		#exit 0
+	    echo "Done, sleeping"
 	    sleep 10;
 	    return
 	fi
