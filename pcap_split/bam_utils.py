@@ -84,7 +84,9 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
 
     #create the read group fastqs
     try:
-        subprocess.check_call("bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s < %s" %(work_dir, bam_filename), shell=True)
+        cmd = "bamtofastq outputperreadgroup=1 gz=1 level=1 inputbuffersize=2097152000 outputdir=%s `mktemp -p %s bamtofastq_XXXXXXXXX` < %s" %(work_dir, workfi bam_filename)
+        logger.info("Running %s" % cmd)
+        subprocess.check_call(cmd, shell=True)
     except:
         print "Failure in bam splitting"
         return 1
