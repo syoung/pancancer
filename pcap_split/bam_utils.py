@@ -109,6 +109,4 @@ def gen_unaligned_bam(bam_filename, analysis_id, metadata, specimen_dict, work_d
         utils.clean_up_dir(output_dir)
 
     else:
-        print "Invalid header/metadata for BAM" % bam_filename
-        return 1
-    return 0
+        print "Invalid header/metadata for BAM: %s" % bam_filename
