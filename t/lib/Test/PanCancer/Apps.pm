@@ -107,7 +107,7 @@ method testWorkerAlign {
 		#`touch $flagfile`;		
 		$self->workerAlign();
 		
-		#my $result = $self->workerAlign();
+		my $result = $self->workerAlign();
 		
 		
 		#is($expected, $location, $test->{name});
