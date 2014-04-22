@@ -1,16 +1,22 @@
+
 import os
 import urllib2
+import logging
 import dateutil.parser
 from xml.etree import ElementTree
+
+default_logger = logging.getLogger(name='pcap_split')
 
 class HeaderException(Exception):
     pass
 
-def get_value(result, field):
+def get_value(result, field, logger=default_logger):
     """Get the value of the field from the XML tree root"""
 
     if result.find(field) == None:
-        raise HeaderException("missing field in XML: %s" % field)
+        msg = "missing field in XML: %s" % field
+        logger.error(msg)
+        raise HeaderException(msg)
 
     val = result.find(field).text
     if(val == None):
@@ -20,7 +26,7 @@ def get_value(result, field):
         return val
 
 
-def create_header(analysis_outdir, metadata, rg_dict, specimen_dict):
+def create_header(analysis_outdir, metadata, rg_dict, specimen_dict, logger=default_logger):
     """Generate headers in output dir for the new unaligned BAM named by RG ID"""
 
     rgid = rg_dict["ID"].replace(".", "_")
@@ -36,15 +42,21 @@ def create_header(analysis_outdir, metadata, rg_dict, specimen_dict):
     header_file.write("@CO\tsubmitter_sample_id:%s\n" %metadata["aliquot_id"])
 
     if metadata["sample_type"] not in specimen_dict:
-        raise HeaderException("sample_type %s not found in specimen mapping" % metadata["sample_type"])
+        msg = "sample_type %s not found in specimen mapping" % metadata["sample_type"]
+        logger.error(msg)
+        raise HeaderException(msg)
 
     (icgc_type, sample_class) = specimen_dict[metadata["sample_type"]]
 
     #Sanity check about use_cntl
     if metadata["use_cntl"] == "N/A" and sample_class == "tumour":
-        raise HeaderException("Tumour sample requires use_cntl, set to %s. Are your IDs in the wrong order?" % metadata["use_cntl"])
+        msg = "Tumour sample requires use_cntl, set to %s. Are your IDs in the wrong order?" % metadata["use_cntl"]
+        logger.error(msg)
+        raise HeaderException(msg)
     if sample_class == "normal" and metadata["use_cntl"] != "N/A":
-        raise HeaderException("Normal sample requires N/A use_cntl, set to %s. Are your IDs in the wrong order?" % metadata["use_cntl"])
+        msg = "Normal sample requires N/A use_cntl, set to %s. Are your IDs in the wrong order?" % metadata["use_cntl"]
+        logger.error(msg)
+        raise HeaderException(msg)
                                                             
     header_file.write("@CO\tdcc_specimen_type:%s\n" % icgc_type)
     header_file.write("@CO\tuse_cntl:%s\n" %(metadata["use_cntl"]))
@@ -52,7 +64,7 @@ def create_header(analysis_outdir, metadata, rg_dict, specimen_dict):
     return header
 
 
-def parse_cghub_metadata(analysis_id):
+def parse_cghub_metadata(analysis_id, logger=default_logger):
     """Get the metadata from the XML returned by cgquery"""
 
     xml_url = "https://cghub.ucsc.edu/cghub/metadata/analysisFull/%s" % analysis_id
@@ -63,10 +75,14 @@ def parse_cghub_metadata(analysis_id):
     #error if no or > 1 results
     results = root.findall("Result")
     if len(results) == 0:
-        raise HeaderException("no CGHub metadata found at %s" % xml_url)
+        msg = "no CGHub metadata found at %s" % xml_url
+        logger.error(msg)
+        raise HeaderException(msg)
 
     if len(results) > 1:
-        raise HeaderException("more than one CGHub result found at %s" % xml_url)
+        msg = "more than one CGHub result found at %s" % xml_url
+        logger.error(msg)
+        raise HeaderException(msg)
 
     metadata = dict()
     for result in root.iter("Result"):
@@ -85,7 +101,7 @@ def parse_cghub_metadata(analysis_id):
 
     return metadata
 
-def get_platform_model(root, platform):
+def get_platform_model(root, platform, logger=default_logger):
     """For the PM: code in the RG"""
 
     for result in root.iter("Result"):
@@ -98,7 +114,7 @@ def get_platform_model(root, platform):
                                 platform_model = get_value(plat, "INSTRUMENT_MODEL")
     return platform_model
 
-def get_read_group_info(line):
+def get_read_group_info(line, logger=default_logger):
     """Retrieve required read group information"""
 
     rg_dict = dict()
@@ -139,31 +155,31 @@ def get_read_group_info(line):
 
     for key,value in rg_dict.items():
         if value == "":
-            print("WARNING: missing RG field %s" % key)
+            logger.warning("missing RG field %s" % key)
 
     return rg_dict
 
-def get_cghub_xml(dirname, analysis_id):
+def get_cghub_xml(dirname, analysis_id, logger=default_logger):
     """Get the XML file using cgquery"""
 
     os.system("cgquery analysis_id=%s -a -o %s/metadata.xml" %(analysis_id, dirname))
     return "%s/metadata.xml" %(dirname)
 
-def is_valid_analysis(info, log):
+def is_valid_analysis(info, logger=default_logger):
     """Check fields with controlled vocabulary"""
 
     if(info["center_name"] not in ["BCM", "BCCAGSC", "BI", "HMS-RK", "UNC-LCCC", "WUGSC", "USC-JHU"]):
-        log.write("ERROR: The center %s is not in the defined center vocabulary" %(info["CN"]))
+        logger.error("The center %s is not in the defined center vocabulary" %(info["CN"]))
         return False
     if(info["platform"] not in ["CAPILLARY", "LS454", "ILLUMINA", "SOLID", "HELICOS", "IONTORRENT", "PACBIO"]):
-        log.write("ERROR: The platform %s is not in the defined platform vocabulary" %(info["PL"]))
+        logger.error("The platform %s is not in the defined platform vocabulary" %(info["PL"]))
         return False
     if(info["platform_model"] not in ["Illumina Genome Analyzer II", "Illumina HiSeq", "Illumina HiSeq 2000", "Illumina HiSeq 2500"]):
-        log.write("ERROR: The platform unit %s is not in the defined platform vocabulary" %(info["PU"]))
+        logger.error("The platform unit %s is not in the defined platform vocabulary" %(info["PU"]))
         return False
     return True
 
-def rehead(input_dir, laneLevelBam, header, rgid, analysis_id):
+def rehead(input_dir, laneLevelBam, header, rgid, analysis_id, logger=default_logger):
     """
     Use samtools to reheader the unaligned BAMs, 
     feel it's better to keep the metadata with the BAM itself as well
@@ -172,10 +188,14 @@ def rehead(input_dir, laneLevelBam, header, rgid, analysis_id):
     filename = "%s_%s.cleaned.bam" %(analysis_id, rgid)
     output_file = os.path.join(input_dir, filename)
     os.system("samtools reheader %s %s > %s" %(header, laneLevelBam,  output_file))
-    assert(os.path.exists(output_file))
+    if not os.path.exists(output_file):
+        msg = "after reheader output_file does not exist: %s" % output_file
+        logger.error(msg)
+        raise HeaderException(msg)
+
     return output_file
 
-def getUTCDate(dateString):
+def getUTCDate(dateString, logger=default_logger):
     """Actual UTC with timezone does not validate, change the time to Z"""
 
     if(dateString):

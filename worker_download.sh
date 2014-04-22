@@ -4,6 +4,9 @@ BASEDIR="$(cd `dirname $0`; pwd)"
 SYN_MONITOR="$BASEDIR/synapseICGCMonitor"
 STOP_FLAGFILE="$BASEDIR/stop_download.flag"
 
+. $BASEDIR/align.conf
+
+
 while :
 do
 	if [ -e $STOP_FLAGFILE ]; then
@@ -12,7 +15,7 @@ do
 	fi
 
 	echo "Scanning"
-	UUID=`$SYN_MONITOR getAssignmentForWork ucsc_biofarm todownload`
+	UUID=`$SYN_MONITOR getAssignmentForWork $ASSIGNEE todownload`
 	if [ $? != 0 ]; then 
 		echo "Done, sleeping"
 		#exit 0
