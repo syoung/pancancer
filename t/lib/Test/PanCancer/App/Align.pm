@@ -3,7 +3,7 @@ use MooseX::Declare;
 use strict;
 use warnings;
 
-class Test::PanCancer::Apps extends PanCancer::Apps {
+class Test::PanCancer::App::Align extends PanCancer::App::Align {
 
 use FindBin qw($Bin);
 use Test::More;
@@ -20,10 +20,10 @@ has 'synapse'	=>	(isa => 'Test::Synapse', is => 'rw', lazy	=>	1, builder	=>	"set
 method setSynapse {
 	my $synapse = Test::Synapse->new({
 		conf		=>	$self->conf(),
-    SHOWLOG     =>  $self->SHOWLOG(),
-    PRINTLOG    =>  $self->PRINTLOG(),
-    logfile     =>  $self->logfile()
-});
+		showlog     =>  $self->showlog(),
+		printlog    =>  $self->printlog(),
+		logfile     =>  $self->logfile()
+	});
 	return $synapse;
 }
 
@@ -69,7 +69,8 @@ method testFileLocation {
 	}
 }
 
-method testWorkerAlign {
+method testAlign {
+	diag("workerAlign");
 	$self->logDebug("");
 
 	$self->conf()->inputfile("$Bin/inputs/config.yaml");
@@ -107,8 +108,16 @@ method testWorkerAlign {
 		#`touch $flagfile`;		
 		$self->workerAlign();
 		
-		my $result = $self->workerAlign();
-		
+		my $result = $self->align();
+		my $appfile	=	"$Bin/inputs/align.app";
+		my $wkfile	=	"$Bin/inputs/align.wk";
+		my $installdir	=	$self->conf()->getKey("agua:INSTALLDIR");
+		$self->logDebug("installdir", $installdir);
+		my $flow	=	"$installdir/bin/logic/flow.pl";
+		#my $command	=	"$flow work addApp --wkfile  $wkfile --appfile $appfile --name align";
+		my $command	=	"$flow work app run --wkfile  $wkfile --name align";
+		$self->logDebug("command", $command);
+		`$command`;
 		
 		#is($expected, $location, $test->{name});
 	}

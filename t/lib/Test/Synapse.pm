@@ -53,6 +53,7 @@ method getWorkAssignment ($state) {
 }
 
 method returnOutput {
+	$self->logDebug("returning from outputs", ${$self->outputs()}[0]);
 	return splice($self->outputs(), 0, 1);
 }
 

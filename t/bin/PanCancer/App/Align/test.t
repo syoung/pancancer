@@ -6,7 +6,7 @@ APPLICATION 	test.t
 
 PURPOSE
 
-	Test PanCancer::Apps module
+	Test PanCancer::App::Align module
 	
 NOTES
 
@@ -37,9 +37,9 @@ my $outputsdir = "$Bin/outputs";
 `mkdir -p $outputsdir` if not -d $outputsdir;
 
 BEGIN {
-	use_ok('Test::PanCancer::Apps');
+	use_ok('Test::PanCancer::App::Align');
 }
-require_ok('Test::PanCancer::Apps');
+require_ok('Test::PanCancer::App::Align');
 
 #### SET CONF FILE
 my $installdir  =   $ENV{'installdir'} || "/agua";
@@ -47,27 +47,27 @@ my $urlprefix  	=   $ENV{'urlprefix'} || "agua";
 
 #### GET OPTIONS
 my $logfile 	= 	"$Bin/outputs/gtfuse.log";
-my $SHOWLOG     =   2;
-my $PRINTLOG    =   5;
+my $showlog     =   2;
+my $printlog    =   5;
 my $help;
 GetOptions (
-    'SHOWLOG=i'     => \$SHOWLOG,
-    'PRINTLOG=i'    => \$PRINTLOG,
+    'showlog=i'     => \$showlog,
+    'printlog=i'    => \$printlog,
     'logfile=s'     => \$logfile,
     'help'          => \$help
 ) or die "No options specified. Try '--help'\n";
 usage() if defined $help;
 
-my $object = new Test::PanCancer::Apps(
+my $object = new Test::PanCancer::App::Align(
     logfile     =>  $logfile,
-	SHOWLOG     =>  $SHOWLOG,
-	PRINTLOG    =>  $PRINTLOG
+	showlog     =>  $showlog,
+	printlog    =>  $printlog
 );
-isa_ok($object, "Test::PanCancer::Apps", "object");
+isa_ok($object, "Test::PanCancer::App::Align", "object");
 
 #### TESTS
 #$object->testFileLocation();
-$object->testWorkerAlign();
+$object->testAlign();
 
 #### SATISFY Agua::Logger::logError CALL TO EXITLABEL
 no warnings;
