@@ -14,6 +14,7 @@ export PATH=/agua/apps/pcap/0.2/bin:$PATH
 export PATH=/agua/apps/bwa/0.1.19:$PATH
 export PATH=/agua/apps/biobambam/0.0.129/src:$PATH
 export PATH=/agua/apps/pcap/PCAP-core/install_tmp/bwa:$PATH
+export PATH=/agua/apps/pcap/PCAP-core/install_tmp/samtools:$PATH
 export PATH=/agua/apps/pcap/PCAP-core/bin:$PATH
 
 #### PYTHON PATH

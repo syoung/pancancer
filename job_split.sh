@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash                                                                     
 
 BASEDIR="$(cd `dirname $0`; pwd)"
 
@@ -13,23 +13,30 @@ UUID=$2
 INDIR=$VOLUME/input
 OUTDIR=$VOLUME/splits
 
-if [ -z $USE_DOCKER ]; then 
-	CMD_PREFIX="" 
+if [ -z $USE_DOCKER ]; then
+        CMD_PREFIX=""
 else
-	CMD_PREFIX="sudo docker run -v $BASEDIR:$BASEDIR -v $VOLUME:$VOLUME -v /mnt:/mnt icgc-aligner"
+        CMD_PREFIX="sudo docker run -v $BASEDIR:$BASEDIR -v $VOLUME:$VOLUME -v \
+/mnt:/mnt icgc-aligner"
 fi
 
 BAM_FILE=$(ls $INDIR/$UUID/*.bam)
 
 SAMPLE_TYPE=`$SYN_MONITOR getInfo $UUID --type`
 
-if [[ "$SAMPLE_TYPE" == "Primary Solid Tumor" ]]; then 
-	NORMAL_ID=`$SYN_MONITOR getInfo $UUID --get-normal`
-	CMD="$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/splits/$UUID --work_dir $WORK_DIR/$UUID --tumor_id $UUID --normal_id $NORMAL_ID"
-	echo "Running $CMD"
-	$CMD
-elif [[ "$SAMPLE_TYPE" == "Blood Derived Normal" || "$SAMPLE_TYPE" == "Solid Tissue Normal" ]]; then
-	$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/splits/$UUID --work_dir $WORK_DIR/$UUID --normal_id $UUID
+if [[ "$SAMPLE_TYPE" == "Primary Solid Tumor" ]]; then
+        NORMAL_ID=`$SYN_MONITOR getInfo $UUID --get-normal`
+        CMD="$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/\
+splits/$UUID --work_dir $WORK_DIR/$UUID --tumor_id $UUID --normal_id $NORMAL_ID\
+"
+        echo "Running $CMD"
+        $CMD
+elif [[ "$SAMPLE_TYPE" == "Blood Derived Normal" || "$SAMPLE_TYPE" == "Solid Ti\
+ssue Normal" ]]; then
+        CMD="$CMD_PREFIX $SPLIT_CODE --bam_path $BAM_FILE --output_dir $VOLUME/split\
+s/$UUID --work_dir $WORK_DIR/$UUID --normal_id $UUID"
+		echo "Running $CMD"
+		$CMD
 else
-	exit 1
+        exit 1
 fi
