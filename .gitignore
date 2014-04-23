@@ -7,7 +7,7 @@ bamsplit_*
 *.pyc
 annaiservices-openrc.sh
 t/bin/PanCancer/Apps/outputs/gtfuse.log
-t/bin/PanCancer/Apps/inputs/00000000-0000-0000-0000-000000000000
+t/bin/PanCancer/App/Align/inputs/00000000-0000-0000-0000-000000000000
 *.sh.*
 
 # INCLUDE THE FOLLOWING
