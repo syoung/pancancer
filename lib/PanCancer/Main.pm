@@ -3,18 +3,18 @@ use MooseX::Declare;
 use strict;
 use warnings;
 
-class PanCancer::Main with Agua::Common::Logger {
+class PanCancer::Main with (Agua::Common::Logger, Agua::Common::Util) {
 
 #####////}}}}}
 
 # Integers
-has 'SHOWLOG'		=>  ( isa => 'Int', is => 'rw', default => 2 );
-has 'PRINTLOG'		=>  ( isa => 'Int', is => 'rw', default => 5 );
+has 'showlog'	=>  ( isa => 'Int', is => 'rw', default => 2 );
+has 'printlog'	=>  ( isa => 'Int', is => 'rw', default => 5 );
 
 # Objects
-has 'conf'	=> ( isa => 'Conf::Yaml', is => 'rw', lazy => 1, builder => "setConf" );
-has 'ops'	=> ( isa => 'Agua::Ops', is => 'rw', lazy => 1, builder => "setOps" );
-
+has 'ops'		=> ( isa => 'Agua::Ops', is => 'rw', lazy => 1, builder => "setOps" );
+has 'conf'		=> ( isa => 'Conf::Yaml', is => 'rw', lazy => 1, builder => "setConf" );
+has 'synapse'	=> ( isa => 'Synapse', is => 'rw', lazy => 1, builder => "setSynapse" );
 
 use Conf::Yaml;
 use Agua::Ops;
@@ -41,8 +41,8 @@ method latestVersion ($package) {
 method setConf {
 	my $conf 	= Conf::Yaml->new({
 		backup		=>	1,
-		SHOWLOG		=>	$self->SHOWLOG(),
-		PRINTLOG	=>	$self->PRINTLOG()
+		showlog		=>	$self->showlog(),
+		printlog	=>	$self->printlog()
 	});
 	
 	$self->conf($conf);
@@ -51,8 +51,8 @@ method setConf {
 method setOps () {
 	my $ops = Agua::Ops->new({
 		conf		=>	$self->conf(),
-		SHOWLOG		=>	$self->SHOWLOG(),
-		PRINTLOG	=>	$self->PRINTLOG()
+		showlog		=>	$self->showlog(),
+		printlog	=>	$self->printlog()
 	});
 
 	$self->ops($ops);	

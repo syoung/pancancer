@@ -16,8 +16,8 @@ use lib "$Bin/../../../lib";
 use PanCancer::Apps;
 
 GetOptions (
-    'SHOWLOG=i'     => \$SHOWLOG,
-    'PRINTLOG=i'    => \$PRINTLOG,
+    'showlog=i'     => \$showlog,
+    'printlog=i'    => \$printlog,
     'help'          => \$help
 ) or die "No options specified. Try '--help'\n";
 usage() if defined $help;
@@ -29,15 +29,15 @@ my $conf = Conf::Yaml->new(
     inputfile   =>  $configfile,
     backup      =>  1,
 
-    SHOWLOG     =>  $SHOWLOG,
-    PRINTLOG    =>  $PRINTLOG,
+    showlog     =>  $showlog,
+    printlog    =>  $printlog,
     logfile     =>  $logfile
 );
 
 my $object = PanCancer::Apps->new({
 		conf		=>	$conf,
-    SHOWLOG     =>  $SHOWLOG,
-    PRINTLOG    =>  $PRINTLOG,
+    showlog     =>  $showlog,
+    printlog    =>  $printlog,
     logfile     =>  $logfile
 });
 
