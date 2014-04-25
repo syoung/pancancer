@@ -26,18 +26,24 @@ export PYTHONPATH=/usr/local/lib/python2.7/lib-dynload:$PYTHONPATH
 
 #### PERL5LIB
 export PERL5LIB=
-export PERL5LIB=/agua/apps/perl/5.18.2/lib/5.18.2/lib/perl5:$PERL5LIB
-export PERL5LIB=/agua/apps/perl/5.18.2/lib/5.18.2/lib/perl5/x86_64-linux-gnu-thread-multi:$PERL5LIB
+export PERL5LIB=/agua/apps/pcap/0.3.0/lib:$PERL5LIB
 export PERL5LIB=/agua/apps/pcap/0.3.0/lib/perl5:$PERL5LIB
 export PERL5LIB=/agua/apps/pcap/0.3.0/lib/perl5/x86_64-linux-gnu-thread-multi:$PERL5LIB
 export PERL5LIB=/agua/apps/pcap/PCAP-core/lib:$PERL5LIB
-
-## aliased.pm
-export PERL5LIB=/agua/apps/perl/5.18.2/lib/site_perl/5.18.2:$PERL5LIB
-export PERL5LIB=/agua/apps/perl/build/perl-5.18.2/lib:$PERL5LIB
+export PERL5LIB=/agua/apps/pcap/0.3.0/lib/perl5/x86_64-linux-gnu-thread-multi:$PERL5LIB
 
 #### LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=
 export LD_LIBRARY_PATH=/mnt/data/apps/libs/boost/1.39.0/libs:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/agua/apps/biobambam/libmaus-0.0.108-release-20140319092837/src/.libs:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/agua/apps/pcap/PCAP-core/install_tmp/libmaus/src/.libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/agua/apps/pcap/PCAP-core/install_tmp/snappy/.libs:$LD_LIBRARY_PATH
+
+export ASSIGNEE=ucsc_pod
+export KEYFILE=$HOME/annai_cghub.key
+export REF_SEQ=/opt/reference/genome.fa.gz
+export WORK_DIR=/mnt
+
+#export PERL5LIB=$HOME/align/ICGC/lib/perl5
+
+#export PATH=$HOME/align/cghub/bin:$HOME/opt/perl/bin:$PATH:$HOME/align/ICGC/bin

@@ -4,13 +4,13 @@ BASEDIR="$(cd `dirname $0`; pwd)"
 
 ALIGN=bwa_mem.pl
 
-VOLUME=$1
-UUID=$2
+#VOLUME=$1
+UUID=$1
 
-. $BASEDIR/align.conf
-
-INPUT_BASE=$VOLUME/splits
-OUTPUT_BASE=$VOLUME/output
+#INPUT_BASE=$VOLUME/splits
+#OUTPUT_BASE=$VOLUME/output
+INPUT_BASE=/pancanfs/splits
+OUTPUT_BASE=/pancanfs/output
 
 THREADS=$(cat /proc/cpuinfo | grep processor | wc -l)
 echo "THREADS: $THREADS"
@@ -20,8 +20,10 @@ BAM_DIR=$INPUT_BASE/$UUID
 CMD_PREFIX=""
 if [ -z $USE_DOCKER ]; then 
 	CMD_PREFIX="" 
+	. $BASEDIR/envars.sh
 else
-	CMD_PREFIX="sudo docker run -v /pancanfs:/pancanfs -v $VOLUME:$VOLUME icgc-aligner"
+	CMD_PREFIX="sudo docker run -v /pancanfs:/pancanfs -v /pancanfs2:/pancanfs2 -v /pancanfs3:/pancanfs3 icgc-aligner"
+	. $BASEDIR/align.conf
 fi
 
 if [ -z $NO_MERGE ]; then
