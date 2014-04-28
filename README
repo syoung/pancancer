@@ -1,6 +1,297 @@
+README
 
-Setup
+UCSC Setup
+----------
 
 1) Add list of network attached volumes to volume.list
 
 2) Configure 'align.conf', set KEYFILE and ASSIGNEE
+
+
+BioFarm Setup
+-------------
+
+1) Add project and workflows to database
+
+# Add project to database
+cd /agua/apps/pancancer/conf
+/agua/bin/cli/flow.pl ./PanCancer.proj save
+
+# Add workflows to project (and save to database)
+cd /agua/apps/pancancer/conf
+/agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 1-Download.work
+/agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 2-Split.work
+/agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 3-Align.work
+
+
+2) Verify the workflow data is stored in the database
+
+# Debug queries
+
+DELETE FROM project where name='PanCancer'; DELETE FROM workflow where project='PanCancer'; DELETE FROM stage where project='PanCancer'; DELETE FROM stageparameter WHERE project='PanCancer';
+SELECT * FROM project where name='PanCancer'\G select * from workflow where project='PanCancer'\G SELECT * from stage where project='PanCancer'\G SELECT * from stageparameter WHERE project='PanCancer'\G
+
+# MySQL queries
+SELECT * FROM project where name='PanCancer'\G
+SELECT * FROM workflow where project='PanCancer' order by number\G
+SELECT * from stage where project='PanCancer' order by number;
+SELECT * from stageparameter where project='PanCancer' order by appnumber;
+
+
+SELECT * FROM workflow where project='PanCancer' order by number\G
+*************************** 1. row ***************************
+   username: syoung
+    project: PanCancer
+       name: Download
+     number: 1
+     status: 
+description: Use GeneTorrent to download files from CGHub
+      notes: 
+ provenance: 
+*************************** 2. row ***************************
+   username: syoung
+    project: PanCancer
+       name: Split
+     number: 2
+     status: 
+description: Split sample-level BAM files into lane-level BAM files
+      notes: Wrapper for bam_split.py
+ provenance: 
+*************************** 3. row ***************************
+   username: syoung
+    project: PanCancer
+       name: Align
+     number: 3
+     status: 
+description: Alignment of lane-level BAM files
+      notes: Piped together bamtofastq -> bwa mem --> bamsort
+ provenance: 
+3 rows in set (0.00 sec)
+
+
+SELECT * from stage where project='PanCancer' order by number\G
+*************************** 1. row ***************************
+           owner: anonymous
+         package: pancancer
+         version: 0.0.1
+      installdir: /agua/apps/pancancer
+        username: syoung
+         project: PanCancer
+        workflow: Align
+  workflownumber: 3
+            name: align
+          number: 0
+            type: aligner
+        location: bin/job_align.sh
+        executor: source /agua/apps/pancancer/envars.sh &&
+         cluster: 
+          submit: 0
+      stderrfile: 
+      stdoutfile: 
+          queued: 0000-00-00 00:00:00
+         started: 0000-00-00 00:00:00
+       completed: 0000-00-00 00:00:00
+     workflowpid: 0
+        stagepid: 0
+      stagejobid: 0
+          status: 
+       stagename: 
+stagedescription: 
+      stagenotes: 
+*************************** 2. row ***************************
+           owner: anonymous
+         package: pancancer
+         version: 0.0.1
+      installdir: /agua/apps/pancancer
+        username: syoung
+         project: PanCancer
+        workflow: Split
+  workflownumber: 2
+            name: split
+          number: 0
+            type: converter
+        location: bin/job_split.sh
+        executor: source /agua/apps/pancancer/envars.sh &&
+         cluster: 
+          submit: 0
+      stderrfile: 
+      stdoutfile: 
+          queued: 0000-00-00 00:00:00
+         started: 0000-00-00 00:00:00
+       completed: 0000-00-00 00:00:00
+     workflowpid: 0
+        stagepid: 0
+      stagejobid: 0
+          status: 
+       stagename: 
+stagedescription: 
+      stagenotes: 
+*************************** 3. row ***************************
+           owner: anonymous
+         package: pancancer
+         version: 0.0.1
+      installdir: /agua/apps/pancancer
+        username: syoung
+         project: PanCancer
+        workflow: Download
+  workflownumber: 1
+            name: download
+          number: 0
+            type: aligner
+        location: bin/job_download.sh
+        executor: source /agua/apps/pancancer/envars.sh &&
+         cluster: 
+          submit: 0
+      stderrfile: 
+      stdoutfile: 
+          queued: 0000-00-00 00:00:00
+         started: 0000-00-00 00:00:00
+       completed: 0000-00-00 00:00:00
+     workflowpid: 0
+        stagepid: 0
+      stagejobid: 0
+          status: 
+       stagename: 
+stagedescription: 
+      stagenotes: 
+
+SELECT * from stageparameter where project='PanCancer' order by appnumber\G
+*************************** 1. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Align
+workflownumber: 0
+       appname: align
+     appnumber: 0
+          name: uuid
+       ordinal: 2
+        locked: 0
+     paramtype: String
+      category: id
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Unique identifier for the sample
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+*************************** 2. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Align
+workflownumber: 0
+       appname: align
+     appnumber: 0
+          name: volume
+       ordinal: 1
+        locked: 0
+     paramtype: String
+      category: directory
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Path to the base directory containing input file subfolders
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+*************************** 3. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Split
+workflownumber: 0
+       appname: split
+     appnumber: 0
+          name: uuid
+       ordinal: 2
+        locked: 0
+     paramtype: String
+      category: id
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Unique identifier for the sample
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+*************************** 4. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Split
+workflownumber: 0
+       appname: split
+     appnumber: 0
+          name: volume
+       ordinal: 1
+        locked: 0
+     paramtype: String
+      category: directory
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Path to the base directory containing input file subfolders
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+*************************** 5. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Download
+workflownumber: 0
+       appname: download
+     appnumber: 0
+          name: uuid
+       ordinal: 2
+        locked: 0
+     paramtype: String
+      category: id
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Unique identifier for the sample
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+*************************** 6. row ***************************
+         owner: syoung
+      username: syoung
+       project: PanCancer
+      workflow: Download
+workflownumber: 0
+       appname: download
+     appnumber: 0
+          name: volume
+       ordinal: 1
+        locked: 0
+     paramtype: String
+      category: directory
+     valuetype: input
+      argument: 
+         value: 
+    discretion: 
+        format: 
+   description: Path to the base directory containing input file subfolders
+          args: 
+   inputParams: 
+ paramFunction: 
+       chained: 0
+6 rows in set (0.00 sec)
