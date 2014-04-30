@@ -19,7 +19,7 @@ if [ $? != 0 ]; then
 fi
 
 if [ ! -e $VOLUME/input/$UUID ]; then 
-	echo "Download error"
+	echo "Expected download directory not found"
 	exit 1
 fi
 

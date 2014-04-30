@@ -9,11 +9,11 @@ UCSC Setup
 
 
 BioFarm Setup
--------------
+------------- 
 
 1) Add project and workflows to database
 
-# Add project to database
+# Add project file to database
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./PanCancer.proj save
 
@@ -22,6 +22,15 @@ cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 1-Download.work
 /agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 2-Split.work
 /agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 3-Align.work
+
+
+# Add test project to database
+cd /agua/apps/pancancer/conf
+/agua/bin/cli/flow.pl ./Test.proj save --username testuser
+
+# Add test workflow
+/agua/bin/cli/flow.pl Test.proj saveWorkflow --wkfile 1-Sleep.work --username testuser
+
 
 
 2) Verify the workflow data is stored in the database

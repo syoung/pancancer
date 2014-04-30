@@ -106,7 +106,7 @@ method testAlign {
 		$self->synapse()->outputs([$uuid]);
 		
 		#`touch $flagfile`;		
-		$self->workerAlign();
+		$self->align();
 		
 		my $result = $self->align();
 		my $appfile	=	"$Bin/inputs/align.app";

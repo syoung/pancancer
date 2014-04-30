@@ -9,6 +9,7 @@ class PanCancer::App::Align extends PanCancer::Main {
 
 use FindBin qw($Bin);
 
+use Agua::CLI::App;
 use Synapse;
 
 use Conf::Yaml;
@@ -69,7 +70,8 @@ method workerAlign {
 			#$self->logDebug("callback", $callback);
 			my $error		=	$self->run(*align, {
 				uuid		=>	$uuid,
-				location	=>	$location
+				location	=>	$location,
+				appfile		=>	$appfile
 			});
 			if ( defined $error ) {
 				$self->synapse()->assignError($uuid, "error:aligning");
@@ -122,6 +124,12 @@ method align ($args) {
 	my $uuid		=	$args->{uuid};
 	my $bwamem		=	"$Bin/bwa_mem.pl";
 	my $sourcefile	=	"$Bin/envars.sh";
+
+	$self->logDebug("location", $location);
+	$self->logDebug("uuid", $uuid); 
+	
+	
+	
 	#my $command	=	"source $sourcefile; $bwamem $uuid $location";
 	#
 	#`$command`;

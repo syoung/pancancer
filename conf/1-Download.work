@@ -23,7 +23,8 @@
                "paramtype" : "String",
                "category" : "directory",
                "valuetype" : "input",
-               "ordinal" : 1
+               "ordinal" : 1,
+			   "value" : "/pancanfs"
             },
             {
                "param" : "uuid",
@@ -31,7 +32,8 @@
                "paramtype" : "String",
                "valuetype" : "input",
                "category" : "id",
-               "ordinal" : 2
+               "ordinal" : 2,
+			   "value" : "<SAMPLEID>"
             }
          ]
       }

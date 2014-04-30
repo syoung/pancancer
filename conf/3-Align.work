@@ -23,7 +23,8 @@
                "paramtype" : "String",
                "valuetype" : "input",
                "category" : "directory",
-               "description" : "Path to the base directory containing input file subfolders"
+               "description" : "Path to the base directory containing input file subfolders",
+               "value" : "/pancanfs"
             },
             {
                "param" : "uuid",
@@ -32,7 +33,8 @@
                "paramtype" : "String",
                "valuetype" : "input",
                "category" : "id",
-               "description" : "Unique identifier for the sample"
+               "description" : "Unique identifier for the sample",
+               "value" : "<SAMPLEID>"
             }
          ]
       }

@@ -18583,3 +18583,36 @@
 2014-04-22 12:08:09    [DEBUG]   	PanCancer::App::Align::run	104	callback: *PanCancer::App::Align::align
 2014-04-22 12:08:09    [DEBUG]   	PanCancer::App::Align::run	105	args: {"location":"/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs","uuid":"00000000-0000-0000-0000-000000000000"}
 2014-04-22 12:08:09    [DEBUG]   	Test::Synapse::returnOutput	56	returning from outputs: 00000000-0000-0000-0000-000000000000
+2014-04-24 11:12:30    [DEBUG]   	Test::PanCancer::App::Align::testAlign	74	
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	49	locations: ["/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs2","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs3"]
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	50	alignscript: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/jobalign.pl
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	51	flagfile: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/stopalign.flag
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::getAssignment	98	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	56	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	58	location: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::workerAlign	66	DOING CALLBACK
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::run	104	callback: *PanCancer::App::Align::align
+2014-04-24 11:12:30    [DEBUG]   	PanCancer::App::Align::run	105	args: {"uuid":"00000000-0000-0000-0000-000000000000","location":"/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs"}
+2014-04-24 11:12:30    [DEBUG]   	Test::Synapse::returnOutput	56	returning from outputs: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:18    [DEBUG]   	Test::Synapse::returnOutput	56	returning from outputs: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:18    [DEBUG]   	Test::PanCancer::App::Align::testAlign	74	
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	50	locations: ["/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs2","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs3"]
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	51	alignscript: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/jobalign.pl
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	52	flagfile: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/stopalign.flag
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::getAssignment	99	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	57	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	59	location: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::workerAlign	67	DOING CALLBACK
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::run	105	callback: *PanCancer::App::Align::align
+2014-04-24 13:23:18    [DEBUG]   	PanCancer::App::Align::run	106	args: {"location":"/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs","uuid":"00000000-0000-0000-0000-000000000000"}
+2014-04-24 13:23:38    [DEBUG]   	Test::PanCancer::App::Align::testAlign	74	
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	50	locations: ["/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs2","/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs3"]
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	51	alignscript: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/jobalign.pl
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	52	flagfile: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/stopalign.flag
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::getAssignment	99	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	57	uuid: 00000000-0000-0000-0000-000000000000
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	59	location: /mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::workerAlign	67	DOING CALLBACK
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::run	105	callback: *PanCancer::App::Align::align
+2014-04-24 13:23:38    [DEBUG]   	PanCancer::App::Align::run	106	args: {"uuid":"00000000-0000-0000-0000-000000000000","location":"/mnt/repos/private/syoung/aguadev/apps/pancancer/t/bin/PanCancer/App/Align/inputs/pancanfs"}
+2014-04-24 13:23:38    [DEBUG]   	Test::Synapse::returnOutput	56	returning from outputs: 00000000-0000-0000-0000-000000000000
