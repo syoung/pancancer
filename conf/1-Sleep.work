@@ -7,20 +7,21 @@
    "apps" : [
       {
          "name" : "sleep",
-         "type" : "test",
+		 "number": 1,
+		 "type" : "test",
          "package" : "bioapps",
          "location" : "bin/test/sleep.sh",
          "installdir" : "/agua/apps/bioapps",
-         "executor" :"source /agua/apps/pancancer/envars.sh && ",
          "version" : "0.0.1",
          "description" : "Sleep script for testing",
          "parameters" : [
             {
                "param" : "sleep",
-               "description" : "Number of seconds to sleep",
-               "paramtype" : "Integer",
+               "appnumber" : 1,
+			   "description" : "Number of seconds to sleep",
+               "paramtype" : "input",
                "category" : "test",
-               "valuetype" : "input",
+               "valuetype" : "String",
                "ordinal" : 1,
 			   "value":	30
             }
