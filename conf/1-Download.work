@@ -10,7 +10,7 @@
          "number": 1,
          "type" : "downloader",
          "package" : "pancancer",
-         "location" : "job_download.sh",
+         "location" : "bin/job_download.sh",
          "installdir" : "/agua/apps/pancancer",
          "executor" :"/agua/apps/pancancer/envars.sh && ",
          "type" : "aligner",
