@@ -10,7 +10,7 @@
          "number": 3,
          "type" : "aligner",
          "package" : "pancancer",
-         "location" : "bin/job_align.sh",
+         "location" : "job_align.sh",
          "installdir" : "/agua/apps/pancancer",
          "executor" :"/agua/apps/pancancer/envars.sh && ",
          "version" : "0.0.1",

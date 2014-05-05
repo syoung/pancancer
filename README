@@ -13,6 +13,7 @@ BioFarm Setup
 
 1) Add project and workflows to database
 
+#### TO RUN WORKFLOWS
 # Add project file to database
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./PanCancer.proj save --username syoung
@@ -23,14 +24,13 @@ cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 2-Split.work --username syoung
 /agua/bin/cli/flow.pl PanCancer.proj saveWorkflow --wkfile 3-Align.work --username syoung
 
-
+#### TESTING
 # Add test project to database
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./Test.proj save --username testuser --database aguatest
 
 # Add test workflow
 /agua/bin/cli/flow.pl Test.proj saveWorkflow --wkfile 1-Sleep.work --username testuser --database aguatest
-
 
 
 2) SQL queries to verify the workflow data is stored in the database

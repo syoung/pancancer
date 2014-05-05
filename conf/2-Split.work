@@ -10,7 +10,7 @@
          "number": 2,
          "type" : "converter",
          "package" : "pancancer",
-         "location" : "bin/job_split.sh",
+         "location" : "job_split.sh",
          "installdir" : "/agua/apps/pancancer",
          "executor" :"/agua/apps/pancancer/envars.sh && ",
          "version" : "0.0.1",
