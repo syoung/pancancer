@@ -4,6 +4,12 @@ BASEDIR="$(cd `dirname $0`; pwd)"
 
 ALIGN=bwa_mem.pl
 
+export ASSIGNEE=ucsc_biofarm
+export KEYFILE=${HOME}/annai-cghub.key
+export REF_SEQ=/pancanfs/reference/genome.fa.gz
+export WORK_DIR=/mnt
+
+
 #VOLUME=$1
 UUID=$1
 

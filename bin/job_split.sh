@@ -4,6 +4,9 @@ BASEDIR="$(cd `dirname $0`; pwd)"
 
 #. $BASEDIR/align.conf
 
+export WORK_DIR=/mnt
+
+
 SPLIT_CODE="$BASEDIR/../pcap_split/pcap_split.py"
 SYN_MONITOR="$BASEDIR/../synapseICGCMonitor"
 
@@ -18,6 +21,7 @@ OUTDIR=$VOLUME/splits
 
 if [ -z $USE_DOCKER ]; then
         CMD_PREFIX=""
+		
 else
         CMD_PREFIX="sudo docker run -v $BASEDIR/..:$BASEDIR/.. -v $VOLUME:$VOLUME -v \
 /mnt:/mnt icgc-aligner"

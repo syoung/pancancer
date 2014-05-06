@@ -2,7 +2,12 @@
 
 
 BASEDIR="$(cd `dirname $0`; pwd)"
-. $BASEDIR/../align.conf
+
+
+#. $BASEDIR/../align.conf
+
+export ASSIGNEE=ucsc_biofarm
+export KEYFILE=${HOME}/annai-cghub.key
 
 VOLUME=$1
 UUID=$2
