@@ -47,8 +47,8 @@ SELECT * FROM project where name='PanCancer'\G select * from workflow where proj
 
 SELECT * FROM project where name='PanCancer'\G
 SELECT * FROM workflow where project='PanCancer' order by number\G
-SELECT * from stage where project='PanCancer' order by number;
-SELECT * from stageparameter where project='PanCancer' order by appnumber;
+SELECT * from stage where project='PanCancer' order by number\G
+SELECT * from stageparameter where project='PanCancer' order by appnumber\G
 
 
 SELECT * FROM workflow where project='PanCancer' order by number\G

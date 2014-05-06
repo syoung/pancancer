@@ -20,10 +20,10 @@ BAM_DIR=$INPUT_BASE/$UUID
 CMD_PREFIX=""
 if [ -z $USE_DOCKER ]; then 
 	CMD_PREFIX="" 
-	. $BASEDIR/envars.sh
+	. $BASEDIR/../envars.sh
 else
 	CMD_PREFIX="sudo docker run -v /pancanfs:/pancanfs -v /pancanfs2:/pancanfs2 -v /pancanfs3:/pancanfs3 icgc-aligner"
-	. $BASEDIR/align.conf
+	. $BASEDIR/../align.conf
 fi
 
 if [ -z $NO_MERGE ]; then

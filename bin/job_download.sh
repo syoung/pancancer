@@ -2,7 +2,7 @@
 
 
 BASEDIR="$(cd `dirname $0`; pwd)"
-. $BASEDIR/align.conf
+. $BASEDIR/../align.conf
 
 VOLUME=$1
 UUID=$2
