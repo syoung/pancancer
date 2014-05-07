@@ -1,7 +1,12 @@
 #!/bin/bash
 
-#### PERL
-#export PATH=/agua/apps/perl/5.18.2/bin:$PATH
+#### AUTHENTICATION
+export ASSIGNEE=ucsc_biofarm
+export KEYFILE=${HOME}/annai-cghub.key
+
+#### FILE SYSTEM
+export REF_SEQ=/pancanfs/reference/genome.fa.gz
+export WORK_DIR=/mnt
 
 #### GLIBC
 export PATH=/mnt/data/apps/libs/boost/1.39.0/libs:$PATH

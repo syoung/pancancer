@@ -14,6 +14,11 @@ BioFarm Setup
 1) Add project and workflows to database
 
 #### TO RUN WORKFLOWS
+# Delete old project entry if exists
+cd /agua/apps/pancancer/conf
+/agua/bin/cli/flow.pl ./PanCancer.proj delete --username syoung
+
+
 # Add project file to database
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./PanCancer.proj save --username syoung

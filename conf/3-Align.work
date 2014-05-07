@@ -18,20 +18,9 @@
          "linkurl" : "http://www.github.com/annaisystems/pancancer",
          "parameters" : [
             {
-               "param" : "volume",
-               "appnumber" : 3,
-               "ordinal" : 1,
-               "argument" : "",
-               "paramtype" : "input",
-               "valuetype" : "String",
-               "category" : "directory",
-               "description" : "Path to the base directory containing input file subfolders",
-               "value" : "/pancanfs"
-            },
-            {
                "param" : "uuid",
                "appnumber" : 3,
-               "ordinal" : 2,
+               "ordinal" : 1,
                "argument" : "",
                "paramtype" : "input",
                "valuetype" : "String",
