@@ -18,7 +18,6 @@ BioFarm Setup
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./PanCancer.proj delete --username syoung
 
-
 # Add project file to database
 cd /agua/apps/pancancer/conf
 /agua/bin/cli/flow.pl ./PanCancer.proj save --username syoung

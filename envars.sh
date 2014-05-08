@@ -2,7 +2,7 @@
 
 #### AUTHENTICATION
 export ASSIGNEE=ucsc_biofarm
-export KEYFILE=${HOME}/annai-cghub.key
+export KEYFILE=/root/annai-cghub.key
 
 #### FILE SYSTEM
 export REF_SEQ=/pancanfs/reference/genome.fa.gz
