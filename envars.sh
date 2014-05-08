@@ -3,6 +3,8 @@
 #### AUTHENTICATION
 export ASSIGNEE=ucsc_biofarm
 export KEYFILE=/root/annai-cghub.key
+export REF_SEQ=/opt/reference/genome.fa.gz
+export WORK_DIR=/mnt
 
 #### FILE SYSTEM
 export REF_SEQ=/pancanfs/reference/genome.fa.gz
@@ -37,8 +39,4 @@ export LD_LIBRARY_PATH=/agua/apps/biobambam/libmaus-0.0.108-release-201403190928
 export LD_LIBRARY_PATH=/agua/apps/pcap/PCAP-core/install_tmp/libmaus/src/.libs:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/agua/apps/pcap/PCAP-core/install_tmp/snappy/.libs:$LD_LIBRARY_PATH
 
-export ASSIGNEE=ucsc_pod
-export KEYFILE=$HOME/annai_cghub.key
-export REF_SEQ=/opt/reference/genome.fa.gz
-export WORK_DIR=/mnt
 
