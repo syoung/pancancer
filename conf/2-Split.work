@@ -12,7 +12,7 @@
          "package" : "pancancer",
          "location" : "bin/job_split.sh",
          "installdir" : "/agua/apps/pancancer",
-         "executor" :"source /agua/apps/pancancer/envars.sh && ",
+         "executor" : "/agua/apps/pancancer/envars.sh && ",
          "version" : "0.0.1",
          "description" : "Split sample-level BAM files into lane-level BAM files",
          "linkurl" : "http://www.github.com/annaisystems/pancancer",

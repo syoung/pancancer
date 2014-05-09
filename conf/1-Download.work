@@ -12,7 +12,7 @@
          "package" : "pancancer",
          "location" : "bin/job_download.sh",
          "installdir" : "/agua/apps/pancancer",
-         "executor" :"source /agua/apps/pancancer/envars.sh && ",
+         "executor" : "/agua/apps/pancancer/envars.sh && ",
          "type" : "aligner",
          "version" : "0.0.1",
          "description" : "Run gtdownload",
