@@ -3,6 +3,7 @@
 import sys, os, re, argparse, shutil
 import dateutil.parser
 import header_utils, bam_utils, utils
+import traceback
 
 basedir = os.path.abspath(os.path.dirname( __file__ ))
 
@@ -44,17 +45,21 @@ if __name__ == '__main__':
     exit_code = 0
     output_dir = utils.make_new_dir(args.output_dir)
     work_dir = utils.make_new_dir(args.work_dir)
-    if args.tumor_id is None and args.normal_id is not None:
-        metadata = header_utils.parse_cghub_metadata(args.normal_id)
-        metadata['use_cntl'] = 'N/A'
-        exit_code = bam_utils.gen_unaligned_bam(args.bam_path, args.normal_id, metadata, specimen_dict, work_dir, output_dir)
-    elif args.tumor_id is not None and args.normal_id is not None:
-        metadata = header_utils.parse_cghub_metadata(args.tumor_id)
-        metadata['use_cntl'] = args.normal_id
-        exit_code = bam_utils.gen_unaligned_bam(args.bam_path, args.tumor_id, metadata, specimen_dict, work_dir, output_dir)
-    else:
-        print "Please define --normal_id or (--normal_id and --tumor_id)"
-        sys.exit(1)
+    try:
+        if args.tumor_id is None and args.normal_id is not None:
+            metadata = header_utils.parse_cghub_metadata(args.normal_id)
+            metadata['use_cntl'] = 'N/A'
+            exit_code = bam_utils.gen_unaligned_bam(args.bam_path, args.normal_id, metadata, specimen_dict, work_dir, output_dir)
+        elif args.tumor_id is not None and args.normal_id is not None:
+            metadata = header_utils.parse_cghub_metadata(args.tumor_id)
+            metadata['use_cntl'] = args.normal_id
+            exit_code = bam_utils.gen_unaligned_bam(args.bam_path, args.tumor_id, metadata, specimen_dict, work_dir, output_dir)
+        else:
+            print "Please define --normal_id or (--normal_id and --tumor_id)"
+            sys.exit(1)
+    except:
+        traceback.print_exc(file=sys.stderr)
+        exit_code = 1
     if output_dir != work_dir:
         shutil.rmtree(work_dir)
 
