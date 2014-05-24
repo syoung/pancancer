@@ -7,7 +7,7 @@ import subprocess
 
 default_logger = logging.getLogger()
 default_logger.setLevel(logging.DEBUG)
-default_logger.addHandler(logging.StreamHandler())
+default_logger.addHandler(logging.StreamHandler(sys.stdout))
 
 class BAMException(Exception):
     pass
